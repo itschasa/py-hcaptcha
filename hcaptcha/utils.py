@@ -7,8 +7,10 @@ import string
 def latest_version_id():
     with HTTPClient() as http:
         resp = http.request("GET", "https://hcaptcha.com/1/api.js")
-        return resp.headers["location"] \
-            .split("v1/", 1)[1].split("/", 1)[0]
+        data = resp.read().decode("utf-8")
+        start = data.find("https://newassets.hcaptcha.com/captcha/") + 42
+        end = data[start:].find("/") + start
+        return data[start:end]
 
 def random_widget_id():
     widget_id = "".join(random.choices(
