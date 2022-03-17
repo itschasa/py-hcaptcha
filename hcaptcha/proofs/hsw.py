@@ -62,13 +62,22 @@ if is_main_process():
 
     if os.name == "nt":
         subprocess.call(["taskkill", "/f", "/im", "chrome.exe"])
-        browser = subprocess.Popen([
-            os.environ["PROGRAMFILES"] + "/Google/Chrome/Application/chrome.exe",
-            "--start-maximized",
-            "--disable-gpu",
-            "--new-window",
-            "-incognito",
-            "http://localhost:9932/"])
+        try:
+            yesyeseysttstestbrowser = subprocess.Popen([
+                os.environ["PROGRAMFILES(x86)"] + "/Google/Chrome/Application/chrome.exe",
+                "--start-maximized",
+                "--disable-gpu",
+                "--new-window",
+                "-incognito",
+                "http://localhost:9932/"])
+        except:
+            yesyeseysttstestbrowser = subprocess.Popen([
+                os.environ["PROGRAMFILES"] + "/Google/Chrome/Application/chrome.exe",
+                "--start-maximized",
+                "--disable-gpu",
+                "--new-window",
+                "-incognito",
+                "http://localhost:9932/"])
     
     else:
         subprocess.call(["pkill", "-9", "chrome"])
